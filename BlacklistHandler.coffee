@@ -40,6 +40,13 @@ class BlacklistHandler
         t.get 'statuses/mentions_timeline', {
             since_id: _this.since
         }, (err, replies) ->
+            if not replies?
+                setTimeout ->
+                    _this._pollTwitter t
+                , 1000 * 60 * 2
+
+                return
+
             first = true
 
             for reply in replies
