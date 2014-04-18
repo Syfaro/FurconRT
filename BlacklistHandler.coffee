@@ -37,7 +37,9 @@ class BlacklistHandler
         console.log 'Updating blacklist'
 
         _this = this
-        t.get 'statuses/mentions_timeline', (err, replies) ->
+        t.get 'statuses/mentions_timeline', {
+            since_id: _this.since
+        }, (err, replies) ->
             first = true
 
             for reply in replies
