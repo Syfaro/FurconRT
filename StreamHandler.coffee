@@ -1,4 +1,5 @@
 TweetHandler = require './TweetHandler'
+BlacklistHandler = require './BlacklistHandler'
 
 Array::remove = (value) ->
 	idx = @.indexOf value
@@ -10,6 +11,8 @@ Array::remove = (value) ->
 class StreamHandler
 	constructor: (@T, @me, @keywords) ->
 		@_startStream()
+		@blacklist = new BlacklistHandler(@T)
+		@blacklist.updateBlacklist()
 
 	getKeywords: ->
 		return @keywords
@@ -38,6 +41,8 @@ class StreamHandler
 
 		@_restartStream()
 
+	getBlacklistHandler: ->
+		return @blacklist
 
 	_startStream: ->
 		console.log 'Starting stream'
@@ -64,6 +69,10 @@ class StreamHandler
 		console.log 'Stream restarted'
 
 	_tweet: (tweet, me, T) ->
+		if @blacklist.inBlacklist tweet.user.screen_name
+			console.log "Tweet from blacklisted user #{tweet.user.screen_name} - #{tweet.id_str}"
+			return
+
 		handler = new TweetHandler T, me, tweet
 
 module.exports = StreamHandler

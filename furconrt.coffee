@@ -11,6 +11,9 @@ addkeyword = /^add (.*)/i
 removekeyword = /^remove (.*)/i
 list = /^list/i;
 
+addblacklist = /^blacklist (.*)/i
+remblacklist = /^unblacklist (.*)/i
+
 stream = false
 
 updateConfig = ->
@@ -35,6 +38,14 @@ process.stdin.on 'data', (text) ->
 
 	else if text.match list
 		console.log "Keywords: #{stream.getKeywords()}"
+
+	else if text.match addblacklist
+		user = addblacklist.exec(text)[1]
+		stream.getBlacklistHandler().addToBlacklist user
+
+	else if text.match remblacklist
+		user = remblacklist.exec(text)[1]
+		stream.getBlacklistHandler().removeFromBlacklist user
 
 T = new Twit config.twit
 
