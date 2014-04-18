@@ -1,0 +1,22 @@
+{
+  "name": "furcon-rt",
+  "version": "0.0.1",
+  "description": "Twitter bot for retweeting media tweets from furcons",
+  "main": "furconrt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Syfaro/FurconRT.git"
+  },
+  "author": "Syfaro",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/Syfaro/FurconRT/issues"
+  },
+  "homepage": "https://github.com/Syfaro/FurconRT",
+  "dependencies": {
+    "twit": "~1.1.13"
+  }
+}
