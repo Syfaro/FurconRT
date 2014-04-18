@@ -1,5 +1,3 @@
-fs = require 'fs'
-
 class TweetHandler
 	constructor: (@t, @me, @tweet) ->
 		if @goodTweet()
