@@ -2,7 +2,7 @@ fs = require 'fs'
 
 class BlacklistHandler
 	constructor: (@t) ->
-		@blacklist = {}
+		@blacklist = JSON.parse fs.readFileSync 'blacklist.json', 'utf-8'
 		@r = /^@\w+\s+STOP\s*/i
 		@u = /^@\w+\s+UNDO\s*/i
 
